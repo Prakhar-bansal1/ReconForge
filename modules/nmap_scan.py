@@ -12,13 +12,12 @@ def run(target, ports):
 
     output_file = f"reports/{target}_nmap.xml"
 
-    # Convert list into Nmap format, e.g. [22, 80, 443] -> "22,80,443"
     port_string = ",".join(map(str, ports))
 
     command = [
         "nmap",
-        "-sV",   # Service/version detection
-        "-T4",   # Faster timing
+        "-sV",  
+        "-T4",   
         "-p",
         port_string,
         "-oX",
@@ -28,8 +27,6 @@ def run(target, ports):
 
     print("[+] Running Nmap on ports:", port_string)
 
-    # FileNotFoundError (nmap missing) and subprocess.TimeoutExpired are
-    # intentionally allowed to propagate — the caller decides how to handle them.
     result = subprocess.run(
         command,
         capture_output=True,
