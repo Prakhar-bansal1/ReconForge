@@ -73,8 +73,6 @@ ReconForge/
 
 ├── reports/
 
-├── requirements.txt
-
 └── README.md
 ```
 
