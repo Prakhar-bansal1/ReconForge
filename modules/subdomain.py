@@ -15,8 +15,6 @@ def find_subdomains(target, timeout=300):
 
     print("[+] Finding subdomains")
 
-    # FileNotFoundError (subfinder missing) is intentionally allowed to
-    # propagate — the caller decides how to handle it.
     subprocess.run(
         command,
         capture_output=True,
