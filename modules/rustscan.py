@@ -1,9 +1,6 @@
 import re
 import subprocess
 
-
-# Matches RustScan's default "Open <ip>:<port>" lines, anchored to line start
-# so it can't false-positive on timestamps, banners, or other colon+digit text.
 OPEN_PORT_PATTERN = re.compile(r"^Open\s+\S+:(\d+)\s*$", re.MULTILINE)
 
 
