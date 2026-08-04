@@ -69,7 +69,17 @@ def main():
         print("[-] RustScan error:", error)
         ports = []
 
-    print("[+] Open Ports:", ports)
+    print(f"[+] Open Ports found: {len(ports)} (full list in report)")
+
+    # A few hundred+ "open" ports on one host is almost never real — usually
+    # a ulimit/socket-exhaustion artifact or a target tarpitting scanners.
+    # Worth a one-line heads-up even though the full data still goes to file.
+    SUSPICIOUS_PORT_THRESHOLD = 100
+    if len(ports) > SUSPICIOUS_PORT_THRESHOLD:
+        print(
+            f"[!] That's unusually high — check `ulimit -n` against the "
+            f"--ulimit flag, or the target may be tarpitting scanners."
+        )
 
     # ---------------- Nmap ----------------
     try:
@@ -88,10 +98,7 @@ def main():
         print("[-] Nmap XML parse error:", error)
         services = []
 
-    if services:
-        print("\n[+] Open Services")
-        for service in services:
-            print(service)
+    print(f"[+] Services identified: {len(services)} (full detail in report)")
 
     # ---------------- Report ----------------
     report = {
