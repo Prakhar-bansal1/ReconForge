@@ -1,0 +1,37 @@
+
+def run(target):
+
+    output_file = f"reports/{target}_nmap.xml"
+
+
+    command = [
+
+        "nmap",
+
+        "-sV",
+
+        "-O",
+
+        "-p-",
+
+        "-T4",
+
+        "-oX",
+
+        output_file,
+
+        target
+
+    ]
+
+
+    print("[+] Running Nmap")
+
+
+    subprocess.run(command)
+
+
+    print("[+] Nmap completed")
+
+
+    return output_file
